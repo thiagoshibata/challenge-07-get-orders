@@ -1,13 +1,12 @@
 from src.models.interfaces.orders_repository import OrdersRepositoryInterface
+from src.controllers.interfaces.create_orders_controller import CreateOrdersControllerInterface
 
-class CreateOrdersController():
+class CreateOrdersController(CreateOrdersControllerInterface):
     def __init__(self, orders_repository: OrdersRepositoryInterface):
         self.__orders_repository = orders_repository
     
     def create(self, user_id: int, description: str) -> dict:
-        response = self.__create_new_order(user_id, description)
-        print()
-        print(response)
+        self.__create_new_order(user_id, description)
         return self.__format_response(user_id, description)
     
     def __create_new_order(self, user_id: int, description: str) -> None:
