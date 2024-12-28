@@ -6,5 +6,5 @@ class PasswordHandler():
         hashed_password = bcrypt.hashpw(password.encode('utf-8'), salt)
         return hashed_password
     
-    def decrypt_password(self, password: str, hashed_password: str) -> bool:
+    def check_password(self, password: str, hashed_password: str) -> bool:
         return bcrypt.checkpw(password.encode('utf-8'), hashed_password)
