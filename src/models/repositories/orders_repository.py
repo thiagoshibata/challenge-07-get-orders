@@ -20,8 +20,12 @@ class OrdersRepository:
         cursor = self.__conn.cursor()
         cursor.execute(
             '''
-                SELECT * FROM orders WHERE user_id = ?
+                SELECT O.id, O.description, O.created_at, O.user_id , U.username  
+                FROM orders as O
+                INNER JOIN users as U 
+                on O.user_id = U.id
+                WHERE O.user_id = ?
             ''', (user_id,)
         )
-        order = cursor.fetchone()
-        return order
+        orders_user = cursor.fetchall()
+        return orders_user

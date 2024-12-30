@@ -7,10 +7,12 @@ def test_user_repository():
     conn = db_connection_handler.get_connection()
     repo = OrdersRepository(conn)
 
-    user_id = 1
-    description = "order test"
+    # user_id = 1
+    # description = "order test"
 
-    order = repo.create_order(user_id, description)
+    orders = repo.get_order_by_user_id(2)
+
+    # order = repo.create_order(user_id, description)
 
     print()
-    print(order) """
+    print(orders) """
