@@ -15,7 +15,7 @@ class LoginCreatorController(LoginCreatorControllerInterface):
         hashed_password = user[2]
 
         self.__verify_password_correct(password, hashed_password)
-        token = self.__create_jwt_token(user_id)
+        token = self.__create_jwt_token(user_id, username)
         return self.__format_response(username, user_id, token)
 
 
@@ -28,8 +28,8 @@ class LoginCreatorController(LoginCreatorControllerInterface):
         is_correct_password = self.__password_handler.check_password(password, hashed_password)
         if not is_correct_password: raise Exception('Password is incorrect')
 
-    def __create_jwt_token(self, user_id: int) -> str:
-        payload = { "user_id": user_id}
+    def __create_jwt_token(self, user_id: int, username: str) -> str:
+        payload = { "user_id": user_id, "username": username }
         token = self.__jwt_handler.create_jwt_token(payload)
         return token
     

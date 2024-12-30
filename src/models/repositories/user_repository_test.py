@@ -7,9 +7,9 @@ def test_user_repository():
     conn = db_connection_handler.get_connection()
     repo = UserRepository(conn)
 
-    username = "user_test"
-    password = "12345"
-    email = "test@test.com"
+    username = "thiagoshibata"
+    password = "123"
+    email = "thiago.shibata@gmail.com"
 
     user = repo.create_user(username, password, email)
 
