@@ -6,7 +6,7 @@ class JwtHandler():
     def create_jwt_token(self, body: dict = {}) -> str:
         token = jwt.encode(
             payload={
-                "exp": datetime.now(timezone.utc) + timedelta(hours=int(jwt_infos["JWT_HOURS"])),
+                "exp": datetime.now(timezone.utc) + timedelta(minutes=int(jwt_infos["JWT_HOURS"])),
                 **body
             },
             key=jwt_infos["KEY"],
