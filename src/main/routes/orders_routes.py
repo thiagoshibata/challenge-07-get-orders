@@ -4,6 +4,7 @@ from src.views.http_types.http_response import HttpResponse
 
 from src.main.composer.login_create_composer import login_create_composer
 from src.main.composer.create_orders_composer import create_orders_composer
+from src.main.composer.list_orders_by_user_composer import list_orders_by_user_composer
 
 from src.main.middlewares.auth_jwt import auth_jwt_verify
 
@@ -20,4 +21,11 @@ def create_order():
     token_information = auth_jwt_verify()
     http_request = HttpRequest(body=request.json, headers=request.headers, token_infos=token_information)
     http_response = create_orders_composer().handle(http_request)
+    return jsonify(http_response.body), http_response.status_code
+
+@orders_routes_bp.route("/orders", methods=["GET"])
+def list_orders_by_user():
+    token_information = auth_jwt_verify()
+    http_request = HttpRequest(headers=request.headers, token_infos=token_information)
+    http_response = list_orders_by_user_composer().handle(http_request)
     return jsonify(http_response.body), http_response.status_code
