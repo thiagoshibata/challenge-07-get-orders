@@ -13,8 +13,9 @@ def auth_jwt_verify():
     token_information = jwt_handler.decode_jwt_token(token)
     token_uid = token_information["user_id"]
     token_username = token_information["username"]
+    print(token)
 
-    if user_id and token_uid and (int(token_uid)==int(user_id)):
+    if user_id and token_username and token_uid and (int(token_uid)==int(user_id)):
         return token_information
     
     raise Exception("User Unauthorized")
